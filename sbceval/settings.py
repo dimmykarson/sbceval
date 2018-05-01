@@ -25,12 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = '^a(1&on#%&cf!odj@r33y+0v=#49#y9rpa*o$k=5t=y7pvrvl3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
 ALLOWED_HOSTS = []
+SECRET_KEY = '^a(1&on#%&cf!odj@r33y+0v=#49#y9rpa*o$k=5t=y7pvrvl3'
 
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
