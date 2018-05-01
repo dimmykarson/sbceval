@@ -1,0 +1,149 @@
+
+{% extends 'sbcs/base.html' %}
+{% block content %}
+    <style>
+    .Fixed
+        {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+    </style>
+    <script>
+    $('.container').scroll(function() {
+        $('#FixedDiv').css('top', $(this).scrollTop());
+    });
+
+    var checked = []
+    function team_check(obj) {
+        var data_element = $(obj).data("element")
+        var data_id = $(obj).data("id")
+      if($(obj).is(":checked")){
+        $("#page-header-inner").addClass("sticky");
+        checked.push([data_id, data_element])
+      }else{
+        remove_from_checked(data_id)
+      }
+      render();
+    }
+    function team_uncheck(){
+        checked = [];
+        $('input:checkbox').not(this).prop('checked', false);
+        render();
+    };
+
+    function render(){
+      $( "#sbs_container" ).empty();
+      var i;
+      $("#sbs_container").append("<ul>")
+      for(i=0;i<checked.length;i++){
+          $("#sbs_container").append("<li>"+checked[i][1].toUpperCase()+"<a class=\"btn\" onclick=\"team_("+checked[i][0]+")\" href=\"#\">X</li>");
+      }
+      $("#sbs_container").append("</ul>")
+
+    }
+    function remove_from_checked(cod){
+        var i;
+        var index = -1;
+        for(i = 0;i<checked.length;i++){
+            if(cod ==checked[i][0]){
+                index = i;
+                break;
+            }
+        }
+        if (index > -1) {
+          checked.splice(index, 1);
+        }
+        $("input[data-id="+cod+"]").prop('checked', false); //Get all elements with data-company="Microsoft" below "Companies"
+        render();
+    }
+
+    function team_(cod) {
+       remove_from_checked(cod)
+    }
+    </script>
+    {% load static %}
+    <div class="row">
+    <div class="col">
+        <h3>Use form below to inform how much cois do you want to invest and check the team league SBC that you already performed. Enjoy!</h3>
+    </div>
+
+    </div>
+    <br/><br/><br/>
+    <form action="{% url 'evaluate' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm">
+                Value to investing:
+            </div>
+            <div class="input-group col-sm">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="text" class="form-control money_no_decimal" name="value" required>
+
+            </div>
+            <div class="col-sm">*How much coins do you want to invest?</div>
+        </div>
+
+        <div class="row">
+        <div class="col-xl-12">
+         <h5>Available Leagues</h5>
+        </div>
+        {% if leagues %}
+            <div class="col-xl-8">
+                <div class="accordion" id="leagueAccordion">
+                    {% for league in leagues %}
+                          <div class="card-header" id="heading{{ league.0 }}">
+                            <h5 class="mb-0">
+                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ league.0 }}"
+                                         aria-expanded="true" aria-controls="collapse{{ league.0 }}">
+                                {{ league.0.title }}
+                                </button>
+                            </h5>
+                         </div>
+                        <div id="collapse{{ league.0}}"
+                             class="collapse" aria-labelledby="heading{{ league.0 }}" data-parent="#leagueAccordion">
+                            <div class="card-body">
+                                {% for team in league.1 %}
+                                    <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                          <input type="checkbox" aria-label="Checkbox for following text input" name="team" value="{{ team.0 }}" onclick="team_check(this)"
+                                          data-element="{{ team.1 }}" data-id="{{ team.0 }}">
+                                        </div>
+                                      </div>
+                                        <input type="text" class="form-control" readonly aria-label="" value="{{ team.1.title }}">
+                                        <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                                <img src="{% static 'img/coins.png' %}" width="30"/>
+                                        </span>
+                                        </div>
+                                        <input type="text" class="form-control money_no_decimal" style=" text-align: right; " readonly aria-label="Cost" title="Cost" value="{{team.3}} coins">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <h5>SBCs performed:</h5>
+                <button type="button" class="btn btn-warning" onclick="team_uncheck()">Clean all</button>
+                <div id="sbs_container">
+                </div>
+            </div>
+        {% else %}
+            <p>No leagues are available.</p>
+        {% endif %}
+        </div>
+    <div class="Fixed">
+        <input type="submit" value="Evaluate!" class="btn btn-primary btn-lg btn-block" />
+    </div>
+    <br/><br/>
+         <div style="text-align: center">
+            <input type="submit" value="Evaluate!" class="btn btn-primary btn-lg btn-block" />
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,74 @@
+
+{% extends 'sbcs/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="row">
+        <h4>Hey dude, with this parameters we get this results:</h4>
+    </div>
+
+{% if to_produce %}
+    <div class="row">
+    <h2>Produce this SBCs:</h2>
+        {% for p in to_produce %}
+             <div class="input-group mb-3">
+            <input type="text" class="form-control" readonly aria-label="" value="{{ p.0.1.title }}">
+            <div class="input-group-prepend">
+            <span class="input-group-text">
+                    <img src="{% static 'img/coins.png' %}" width="30"/>
+            </span>
+            </div>
+            <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
+                   readonly aria-label="Cost" title="Cost" value="Cost: {{  p.0.3 }} coins">
+             <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
+                   readonly aria-label="Cost" title="Cost" value="Pack Value: {{  p.1 }} coins">
+        </div>
+
+        {% endfor %}
+
+    </div>
+    <div class="row">
+        <h3>We have this numbers to you deal:</h3>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" readonly aria-label="" value="Total Cost">
+            <div class="input-group-prepend">
+            <span class="input-group-text">
+                    <img src="{% static 'img/coins.png' %}" width="30"/>
+            </span>
+            </div>
+            <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
+                   readonly aria-label="Cost" title="Cost" value="{{ total_cost }} coins">
+        </div>
+
+
+    </div>
+    <div class="row">
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" readonly aria-label="" value="Total Gain (in packs)">
+            <div class="input-group-prepend">
+            <span class="input-group-text">
+                    <img src="{% static 'img/coins.png' %}" width="30"/>
+            </span>
+            </div>
+            <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
+                   readonly aria-label="Cost" title="Cost" value="{{ total_gain }} coins">
+        </div>
+
+    </div>
+    <div class="row">
+         <div class="input-group mb-3">
+            <input type="text" class="form-control" readonly aria-label="" value="Gain">
+            <div class="input-group-prepend">
+            <span class="input-group-text">
+                    <img src="{% static 'img/coins.png' %}" width="30"/>
+            </span>
+            </div>
+            <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
+                   readonly aria-label="Cost" title="Cost" value="{{ lucro }} coins">
+        </div>
+
+    </div>
+{% else %}
+    We cant produce nothing, try again late
+{% endif %}
+
+{% endblock %}
