@@ -2,12 +2,20 @@
 {% load staticfiles %}
 <html lang="en">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118634976-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-118634976-1');
+    </script>
+
     <meta charset="UTF-8">
     <title>SBC evaluation</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/mycss.css' %}">
-
-
     <script src="{% static 'js/jquery-3.3.1.min.js' %}" ></script>
     <script src="{% static 'js/bootstrap.js' %}" ></script>
     <script src="{% static 'js/jquery.maskMoney.min.js' %}" ></script>
