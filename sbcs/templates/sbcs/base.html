@@ -15,11 +15,16 @@
 
 <body>
     <div class="page-header">
-        <center>
-        <img src="{% static 'img/twitter.png' %}" width="50"/>
+ <div class="text-center">        <img src="{% static 'img/twitter.png' %}" width="50"/>
             <a href="https://twitter.com/dimmymagalhaes" target="_blank" class="twitter">@dimmymagalhaes</a>
-        </center>
+            <img src="{% static 'img/beta.jpg' %}" width="50"/>
+        </div>
     </div>
+    <br/>
+    <div class="text-center" style="color:red">
+        This is a beta test, if you found some error, tell us: <a href="mailto:dimmyk@gmail.com">dimmyk@gmail.com</a> or by Twitter: <a href="https://twitter.com/dimmymagalhaes" target="_blank" class="twitter">@dimmymagalhaes</a>
+    </div>
+
     <br/>
     {% if messages %}
         {% for message in messages %}
