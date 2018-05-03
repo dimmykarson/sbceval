@@ -1,0 +1,16 @@
+.twitter{
+    color: #2FC2EF;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: inherit;
+    list-style: none;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+.Fixed
+        {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }

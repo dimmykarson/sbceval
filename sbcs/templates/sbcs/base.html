@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Avaliar SBC</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mycss.css' %}">
+
 
     <script src="{% static 'js/jquery-3.3.1.min.js' %}" ></script>
     <script src="{% static 'js/bootstrap.js' %}" ></script>
@@ -13,7 +15,12 @@
 
 <body>
     <div class="page-header">
+        <center>
+        <img src="{% static 'img/twitter.png' %}" width="50"/>
+            <a href="https://twitter.com/dimmymagalhaes" target="_blank" class="twitter">@dimmymagalhaes</a>
+        </center>
     </div>
+    <br/>
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}" role="alert">
