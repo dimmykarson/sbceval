@@ -12,6 +12,10 @@
 
 {% if to_produce %}
     <div class="row">
+        <h5>Platform: {{ platform }}</h5>
+    </div>
+    <div class="row">
+
     <h2>Produce this SBCs:</h2>
         {% for p in to_produce %}
              <div class="input-group mb-3">

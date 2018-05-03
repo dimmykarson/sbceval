@@ -7,13 +7,13 @@ leagues = ["bundesliga", "calcioa", "hyundai", "proleague", "premier", "laliga",
 
 #own = ['311', '287', '290', '291', '300', '301', '302', '145', '166', '178', '181']
 
-def optimize_coins(max_coins, own):
+def optimize_coins(max_coins, own, plataform):
     c = []
     a = []
     b = []
     mapping = []
     for league in leagues:
-        evs = evaluate_league(league)
+        evs = evaluate_league(league, plataform)
         a_aux = []
         for ev in evs:
            cod = ev[0][0]

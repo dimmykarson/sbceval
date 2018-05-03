@@ -4,7 +4,7 @@ from sbcs.core.packs import load_packs
 from sbcs.core.league import load_league
 
 margem = 1000
-def evaluate_league(league_name):
+def evaluate_league(league_name, plataform):
     team_to_make = []
     packs = load_packs()
     league = load_league(league_name)
@@ -12,8 +12,10 @@ def evaluate_league(league_name):
     for team in league:
         if int(team[2])<0:
             continue
+        if(float(team[plataform])<=0):
+            continue
         pack = next((i for i in packs if int(i[0]) == int(team[2])), None)
-        dif = (float(pack[2])-float(team[3]))
+        dif = (float(pack[2])-float(team[plataform]))
         if dif > margem:
             total_gain=total_gain+dif
             team_to_make.append([team, float(pack[2]), dif])
