@@ -1,2 +1,2 @@
-web: gunicorn bootcamp.wsgi --log-file -
+web: gunicorn sbceval.wsgi
 web: python manage.py runserver
