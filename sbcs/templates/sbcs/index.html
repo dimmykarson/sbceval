@@ -57,23 +57,20 @@
     </script>
     {% load static %}
     <div class="row">
-        <h3>About</h3>
-        This system allows you to optimize the use of your Coins by making SBC, indicating to you in which league's SBC you will have more profit in relation to the cost of the SBC and the value of the Pack. We using some information about price from teams, and linear programing to resolve calc about investment.<br/>
-        The prices of teams are updated every day, once time by day.
-        <b>Important</b>We have no connection to EA Sports or just any platform, we just want to help players optimize the use of their coins. We will never ask for your gametag, psn id or username and password from any of the platforms.<br/>
-        All time name are ownership of the times in question.
+        <h3>{% trans 'about' %}</h3>
+        {% trans 'msg3' %}
 
     </div>
     <hr/>
     <div class="row">
     <div class="col">
 
-        <h4>Tutorial</h4>
+        <h4>{% trans 'tutorial' %}</h4>
         <ul>
-            <li>Inform how many coins you want to invest</li>
-            <li>Select you platform</li>
-            <li>Check the league's SBC teams you've already held</li>
-            <li>Click in Evaluate!</li>
+            <li>{% trans 'inst1' %}</li>
+            <li>{% trans 'inst2' %}</li>
+            <li>{% trans 'inst3' %}</li>
+            <li>{% trans 'inst4' %}</li>
 
         </ul>
     </div>
@@ -84,7 +81,7 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-sm">
-                <h5>Value to investing:</h5>
+                <h5>{% trans 'value_invest' %}:</h5>
             </div>
             <div class="input-group col-sm">
               <div class="input-group-prepend">
@@ -93,12 +90,12 @@
               <input type="text" class="form-control money_no_decimal" name="value" required>
 
             </div>
-            <div class="col-sm">*How much coins do you want to invest?</div>
+            <div class="col-sm">*{% trans 'value_invest_hint' %}</div>
         </div>
         <hr/>
         <div class="row">
              <div class="col-sm">
-                <h5>Select your platform:</h5>
+                <h5>{% trans 'select_plataform' %}:</h5>
             </div>
             <div class="input-group col-sm">
                 <ul>
@@ -111,7 +108,7 @@
 <hr/>
         <div class="row">
         <div class="col-xl-12">
-            <h5>Available Leagues</h5><i>(check which the league's SBC teams you've already held)</i>
+            <h5>{% trans 'available_leagues' %}</h5><i>({% trans 'check_sbc' %})</i>
         </div>
         {% if leagues %}
             <div class="col-xl-8">
@@ -151,17 +148,17 @@
                 </div>
             </div>
             <div class="col-xl-4">
-                <h5>SBCs performed:</h5>
-                <button type="button" class="btn btn-warning" onclick="team_uncheck()">Clean all</button>
+                <h5>{% trans 'sbc_performed' %}:</h5>
+                <button type="button" class="btn btn-warning" onclick="team_uncheck()">{% trans 'clean_all' %}</button>
                 <div id="sbs_container">
                 </div>
             </div>
         {% else %}
-            <p>No leagues are available.</p>
+            <p>{% trans 'no_league' %}.</p>
         {% endif %}
         </div>
     <div class="Fixed">
-        <input type="submit" value="Evaluate!" class="btn btn-primary btn-lg btn-block" />
+        <input type="submit" value="{% trans 'evaluate' %}" class="btn btn-primary btn-lg btn-block" />
     </div>
 
     </form>

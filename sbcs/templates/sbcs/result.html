@@ -12,11 +12,11 @@
 
 {% if to_produce %}
     <div class="row">
-        <h5>Platform: {{ platform }}</h5>
+        <h5>{% trans 'platform' %}: {{ platform }}</h5>
     </div>
     <div class="row">
 
-    <h2>Produce this SBCs:</h2>
+    <h2>{% trans 'do_this_sbc' %}:</h2>
         {% for p in to_produce %}
              <div class="input-group mb-3">
             <input type="text" class="form-control" readonly aria-label="" value="{{ p.0.1.title }}">
@@ -26,16 +26,16 @@
             </span>
             </div>
             <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
-                   readonly aria-label="Cost" title="Cost" value="Cost: {{  p.0.3 }} coins">
+                   readonly aria-label="Cost" title="Cost" value="{% trans 'cost' %}: {{  p.0.3 }} coins">
              <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
-                   readonly aria-label="Cost" title="Cost" value="Pack Value: {{  p.1 }} coins">
+                   readonly aria-label="Cost" title="Cost" value="{% trans 'pack_value' %}: {{  p.1 }} coins">
         </div>
 
         {% endfor %}
 
     </div>
     <div class="row">
-        <h3>We have this numbers to you deal:</h3>
+        <h3>{% trans 'deals' %}:</h3>
         <div class="input-group mb-3">
             <input type="text" class="form-control" readonly aria-label="" value="Total Cost">
             <div class="input-group-prepend">

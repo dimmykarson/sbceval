@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = '^a(1&on#%&cf!odj@r33y+0v=#49#y9rpa*o$k=5t=y7pvrvl3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ['sbceval.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['sbceval.herokuapp.com', '127.0.0.1', 'localhost']
 SECRET_KEY = '^a(1&on#%&cf!odj@r33y+0v=#49#y9rpa*o$k=5t=y7pvrvl3'
 
 DEBUG = True
@@ -131,4 +131,15 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
+from unipath import Path
+
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+PROJECT_DIR = Path(__file__).parent
+
+USE_I18N = True
+
+LANGUAGES = (
+    ('en', u'English'),
+    ('pt-br', u'Português'),
+)
+LOCALE_PATHS = (PROJECT_DIR.child('locale'),)
