@@ -1,3 +1,4 @@
+# encoding: utf-8
 """
 Django settings for sbceval project.
 
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'pt-br-br'
 
 TIME_ZONE = 'UTC'
 
@@ -137,9 +138,11 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 PROJECT_DIR = Path(__file__).parent
 
 USE_I18N = True
-
 LANGUAGES = (
-    ('en', u'English'),
     ('pt-br', u'Português'),
+    ('en', u'English'),
 )
 LOCALE_PATHS = (PROJECT_DIR.child('locale'),)
+LANGUAGE_CODE  = "pt-BR"
+
+
