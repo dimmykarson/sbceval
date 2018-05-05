@@ -8,13 +8,10 @@
         <a href="/" class="twitter" style="size: 12px">Home</a>
     </div>
     <br/>
-    <div class="row">
-        <h4>Hey dude, with this parameters we get this results:</h4>
-    </div>
 
 {% if to_produce %}
     <div class="row">
-        <h5>{% trans 'platform' %}: {{ platform }}</h5>
+        <h5>{% trans 'platform' %}: {{ platform_n }}</h5>
     </div>
     <div class="row">
 
@@ -28,7 +25,7 @@
             </span>
             </div>
             <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
-                   readonly aria-label="Cost" title="Cost" value="{% trans 'cost' %}: {{  p.0.3 }} coins">
+                   readonly aria-label="Cost" title="Cost" value="{% trans 'cost' %}: {{  p.0.6 }} coins">
              <input type="text" class="form-control money_no_decimal" style=" text-align: right; "
                    readonly aria-label="Cost" title="Cost" value="{% trans 'pack_value' %}: {{  p.1 }} coins">
         </div>

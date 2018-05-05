@@ -20,7 +20,7 @@ def optimize_coins(max_coins, own, plataform):
            if cod in own:
                continue
            c.append(-1*ev[2])
-           a_aux.append(float(ev[0][3]))
+           a_aux.append(float(ev[0][plataform]))
            mapping.append(ev)
         a = a+a_aux
     a = [a]
@@ -36,8 +36,9 @@ def optimize_coins(max_coins, own, plataform):
     ganho_total = 0.0
     for i in range(len(z)):
         if z[i] == 1:
+            mapping[i][0].append(mapping[i][0][plataform])
             to_produce.append(mapping[i])
-            total=total+float(mapping[i][0][3])
+            total=total+float(mapping[i][0][6])
             ganho_total = ganho_total+float(mapping[i][1])
     lucro = ganho_total-total
     return to_produce, total, ganho_total, lucro

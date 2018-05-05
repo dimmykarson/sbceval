@@ -31,7 +31,7 @@ def evaluate(request):
             platform_n = 'Playstation 4'
         else:
             platform_n = 'Xbox One'
-        context={'to_produce':result[0], 'total_cost':result[1], 'total_gain':result[2], 'lucro':result[3], 'platform':platform_n}
+        context={'to_produce':result[0], 'total_cost':result[1], 'total_gain':result[2], 'lucro':result[3], 'platform_n':platform_n, 'platform':platform}
         return render(request, 'sbcs/result.html', context)
 
 def up(request):
