@@ -57,6 +57,15 @@
     function team_(cod) {
        remove_from_checked(cod)
     }
+
+    function check_todos(cod, status){
+           $('.'+cod).each(function(){ //iterate all listed checkbox items
+            this.checked = status; //change ".checkbox" checked status
+        });
+    }
+
+
+
     </script>
     {% load static %}
     <div class="row">
@@ -108,7 +117,7 @@
                 </ul>
             </div>
         </div>
-<hr/>
+        <hr/>
         <div class="row">
         <div class="col-xl-12">
             <h5>{% trans 'available_leagues' %}</h5><i>({% trans 'check_sbc' %})</i>
@@ -118,22 +127,31 @@
                 <div class="accordion" id="leagueAccordion">
                     {% for league in leagues %}
                           <div class="card-header" id="heading{{ league.0 }}">
+
                             <h5 class="mb-0">
                                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ league.0 }}"
                                          aria-expanded="true" aria-controls="collapse{{ league.0 }}">
                                 {{ league.0.title }}
                                 </button>
                             </h5>
+                          <div class="text-right">
+                                    <button type="button" class="btn btn-info" onclick="check_todos('{{league.0}}_', true)" >Fiz todos da {{league.0.title}}</button>
+                                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-info" onclick="check_todos('{{league.0}}_', false)">Desmarcar todos</button>
+                                </div>
                          </div>
                         <div id="collapse{{ league.0}}"
                              class="collapse" aria-labelledby="heading{{ league.0 }}" data-parent="#leagueAccordion">
+                        <br/>
                             <div class="card-body">
                                 {% for team in league.1 %}
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                          <input type="checkbox" aria-label="Checkbox for following text input" name="team" value="{{ team.0 }}" onclick="team_check(this)"
-                                          data-element="{{ team.1 }}" data-id="{{ team.0 }}">
+                                          <input type="checkbox"
+                                                 aria-label="Checkbox for following text input" name="team" value="{{ team.0 }}"
+                                                 onclick="team_check(this)"
+                                                 data-element="{{ team.1 }}" data-id="{{ team.0 }}" class="{{ league.0 }}_">
                                         </div>
                                       </div>
                                         <input type="text" class="form-control" readonly aria-label="" value="{{ team.1.title }}">

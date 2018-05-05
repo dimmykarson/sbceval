@@ -20,7 +20,8 @@ def evaluate(request):
         platform = request.POST.get('platform')
     except:
         platform = "3"
-    result = optimize_coins(value, checked, int(platform))
+    platform = int(platform)
+    result = optimize_coins(value, checked, platform)
     if len(result[0])==0:
         messages.info(request, "With this coins, we can do nothing :( ")
         return index(request)
