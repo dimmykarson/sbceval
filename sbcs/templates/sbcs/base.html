@@ -55,10 +55,48 @@
             </div>
         {% endfor %}
     {% endif %}
+
     <div class="content container">
+    <div class="row">
+          <div class="col-sm-8"></div>
+          <div class="col-sm-4 text-right">
+            {% if user.is_authenticated %}
+                <span class="buttonText">Logado como: {{ user.username }}</span>
+                <a href="{% url "social:disconnect" "facebook" %}">Sair</a>
+            {% else %}
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <p><a href="{% url "social:begin" "facebook" %}" class="customBtn">
+                        <img class="icon" src="{% static 'img/fb.png' %}" width="42"/>
+                        <span class="buttonText">Login com Facebook</span>
+                    </a>
+                </form>
+            {% endif %}
+          </div>
+    </div>
+     <div class="row">
+          <div class="col-sm-4">
+
+    <div class="row">
+        <a href="/" class="twitter" style="size: 12px">Início</a>
+    </div>
+    <br/>
+
+          </div>
+          <div class="col-sm-8 text-right">
+          </div>
+    </div>
             {% block content %}
             {% endblock %}
+    <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-8 text-right">
+              <a href="{% url 'politica' %}">Política de Privacidade</a> <br/> <a href="{% url 'termos' %}">Termos do Serviço</a>
+          </div>
     </div>
+
+    </div>
+
 </body>
 <script>
   $(function() {

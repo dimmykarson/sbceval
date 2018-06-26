@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sbcs.apps.SbcsConfig',
+    'social_django',
+
 ]
 
 MIDDLEWARE = [
@@ -78,8 +80,12 @@ WSGI_APPLICATION = 'sbceval.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sbceval',
+        'USER':'postgres',
+        'PASSWORD':'postgres',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 
@@ -144,5 +150,25 @@ LANGUAGES = (
 )
 LOCALE_PATHS = (PROJECT_DIR.child('locale'),)
 LANGUAGE_CODE  = "pt-BR"
+
+
+LOGIN_REDIRECT_URL = '/'
+
+
+AUTHENTICATION_BACKENDS =[
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1884191514978202'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'e76ddc5b356a5b9b8c33cfe9deb444b0'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'locale':'pt-BR',
+    'fields':'name, email'
+}
 
 

@@ -4,13 +4,27 @@
 {% load i18n %}
 
 {% block content %}
-
     <script>
     $('.container').scroll(function() {
         $('#FixedDiv').css('top', $(this).scrollTop());
     });
 
+
     var checked = []
+    $(document).ready(function(){
+        var value = $('.selecionados').text();
+        var obj = JSON.parse(value)['data'];
+        for (k in obj){
+            var z = obj[k]['id'];
+            checked.push([z, obj[k]['name']]);
+            console.log(z);
+            console.log($('.'+z));
+            $('.'+z).attr( 'checked', 'checked' );
+        }
+        console.log(checked);
+        render();
+
+    });
     function team_check(obj) {
         var data_element = $(obj).data("element")
         var data_id = $(obj).data("id")
@@ -33,7 +47,7 @@
       var i;
       $("#sbs_container").append("<ul>")
       for(i=0;i<checked.length;i++){
-          $("#sbs_container").append("<li>"+checked[i][1].toUpperCase()+"<a class=\"btn\" onclick=\"team_("+checked[i][0]+")\" href=\"#\">X</li>");
+          $("#sbs_container").append("<li>"+checked[i][1].toUpperCase()+"<a class=\"btn\" t onclick=\"team_("+checked[i][0]+")\" href=\"#\">X</li>");
       }
       $("#sbs_container").append("</ul>")
 
@@ -143,24 +157,26 @@
                         <div id="collapse{{ league.0}}"
                              class="collapse" aria-labelledby="heading{{ league.0 }}" data-parent="#leagueAccordion">
                         <br/>
+
                             <div class="card-body">
                                 {% for team in league.1 %}
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text">
                                           <input type="checkbox"
-                                                 aria-label="Checkbox for following text input" name="team" value="{{ team.0 }}"
+                                                 aria-label="Checkbox for following text input"
+                                                 name="team" value="{{ team.id }}"
                                                  onclick="team_check(this)"
-                                                 data-element="{{ team.1 }}" data-id="{{ team.0 }}" class="{{ league.0 }}_">
+                                                 data-element="{{ team.team }}" data-id="{{ team.id }}" class="{{ team.id }} {{ team.liga }}_">
                                         </div>
                                       </div>
-                                        <input type="text" class="form-control" readonly aria-label="" value="{{ team.1.title }}">
+                                        <input type="text" class="form-control" readonly aria-label="" value="{{ team.team }}">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text">
                                                 <img src="{% static 'img/coins.png' %}" width="30"/>
                                         </span>
                                         </div>
-                                        <input type="text" class="form-control" style=" text-align: right; font-size: 12px" readonly aria-label="Cost" title="Cost" value="PC: {{team.3}} coins, PS:  {{team.4}} coins, XONE:  {{team.5}} ">
+                                        <input type="text" class="form-control" style=" text-align: right; font-size: 12px" readonly aria-label="Cost" title="Cost" value="PC: {{team.preco_ps4}} coins, PS:  {{team.preco_pc}} coins, XONE:  {{team.preco_xone}} ">
                                     </div>
                                 {% endfor %}
                             </div>
@@ -168,11 +184,16 @@
                     {% endfor %}
                 </div>
             </div>
+
+
             <div class="col-xl-4">
                 <h5>{% trans 'sbc_performed' %}:</h5>
                 <button type="button" class="btn btn-warning" onclick="team_uncheck()">{% trans 'clean_all' %}</button>
                 <div id="sbs_container">
                 </div>
+            </div>
+            <div class="sbc_feitos" hidden>
+                {{  sbc_feitos  }}
             </div>
         {% else %}
             <p>{% trans 'no_league' %}.</p>
@@ -181,6 +202,6 @@
     <div class="Fixed">
         <input type="submit" value="{% trans 'evaluate' %}" class="btn btn-primary btn-lg btn-block" />
     </div>
-
+        <div class="selecionados" hidden>{{ sbc_feitos }}</div>
     </form>
 {% endblock %}

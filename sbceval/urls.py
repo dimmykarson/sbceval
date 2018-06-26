@@ -18,9 +18,12 @@ from django.urls import path, include
 from django.http import HttpResponseRedirect
 from django.views.generic.base import RedirectView
 
+
 urlpatterns = [
     path('sbcs/', include('sbcs.urls')),
     path('admin/', admin.site.urls),
     path('', lambda r: HttpResponseRedirect('sbcs/')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('auth-social/', include('social_django.urls', namespace='social')),
 
 ]
